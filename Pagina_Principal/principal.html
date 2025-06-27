@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HidroScan - Monitoreo de Agua</title>
+  <link rel="stylesheet" href="styleprin.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+  <div class="logo-container">
+    <!-- Subes un nivel (..) y entras a "imagenes" -->
+    <img src="../imagenes/logo_hidroscan_vector.svg" alt="Logo HidroScan">
+    <span>HidroScan</span>
+  </div>
+  <div class="menu">
+    <!-- Subes un nivel para ir a index.html -->
+    <a href="../Inicio_de_Sesion/">Inicio</a>
+    <a href="#">Gráficos</a>
+    <a href="#">Ubicación</a>
+    <a href="../Inicio_de_Sesion/Iniciars.html">Iniciar sesión</a> <!-- o "#" si ya estás en login -->
+  </div>
+</header>
+
+
+
+  <div class="container">
+    <div class="left">
+      <h1>Monitorea el agua en tiempo real y cuida tu salud</h1>
+      <p>
+        Nuestra plataforma te muestra los niveles de pH, temperatura, turbidez y más.
+        Aunque los datos son simulados, se actualizan dinámicamente para que entiendas cómo se comporta el agua en tu entorno.
+        Aprende a tomar decisiones informadas y cuidar el planeta de forma sencilla y visual.
+      </p>
+
+      <!-- Galería de imágenes -->
+      <div class="image-gallery">
+        <div class="image-item">
+          <img src="../Imagenes/agua3.jpg" alt="Agua 3">
+        </div>
+        <div class="image-item">
+          <img src="../Imagenes/agua2.avif" alt="Agua 2">
+        </div>
+        <div class="image-item">
+          <img src="../Imagenes/agua1.jpg" alt="Agua 1">
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="card">
+  <h3>Nivel de pH</h3>
+  <span id="ph">6.8 (Estable)</span>
+</div>
+<div class="card">
+  <h3>Temperatura</h3>
+  <span id="temp">22°C</span>
+</div>
+<div class="card">
+  <h3>Turbidez</h3>
+  <span id="turbidez">Moderada</span>
+</div>
+<div class="card">
+  <h3>Oxígeno Disuelto</h3>
+  <span id="oxigeno">6.1 mg/L</span>
+</div>
+ 
+    </div>
+  </div>
+
+  <!-- Sección de Beneficios -->
+  <section class="benefits">
+    <h2>¿Por qué usar HidroScan?</h2>
+    <ul>
+      <li>✅ Datos actualizados sobre la calidad del agua</li>
+      <li>✅ Visualización clara y amigable</li>
+      <li>✅ Fácil de usar desde cualquier dispositivo</li>
+      <li>✅ Contribuyes al cuidado del medio ambiente</li>
+    </ul>
+  </section>
+
+  <!-- Testimonios -->
+  <section class="testimonials">
+  <h2>Lo que dicen nuestros usuarios</h2>
+  <div class="testimonial-container">
+    <div class="testimonial-list">
+      <div class="testimonial">
+        <p>"Gracias a HidroScan ahora sé cuándo el agua en mi zona está segura para mi familia."</p>
+        <span>- Ana, Lima</span>
+      </div>
+      <div class="testimonial">
+        <p>"Muy útil para proyectos escolares y concientización ambiental."</p>
+        <span>- Luis, Arequipa</span>
+      </div>
+      <div class="testimonial">
+        <p>"Excelente visualización, me ayuda a planificar mis cultivos."</p>
+        <span>- Carla, Cajamarca</span>
+      </div>
+      <div class="testimonial">
+        <p>"Una app que todos deberían usar para cuidar el agua."</p>
+        <span>- Pedro, Cusco</span>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- Formulario de contacto -->
+<section class="contacto">
+  <h2>¿Quieres recibir alertas sobre la calidad del agua?</h2>
+  <a href="../Registro/registro.html" class="boton-registro">Registrar</a>
+</section>
+
+
+  <!-- Redes Sociales -->
+  <div class="social">
+    <p>Síguenos en redes sociales</p>
+    <a href="#"><img src="../Imagenes/facebook.png" alt="Facebook" width="30"></a>
+    <a href="#"><img src="../Imagenes/instagram.avif" alt="Instagram" width="30"></a>
+  </div>
+
+  <footer>
+    © 2025 HidroScan | contacto@hidroscan.com | Lima, Perú
+  </footer>
+
+  <script>
+  function getRandomPH() {
+    return (6.5 + Math.random() * 1.0).toFixed(1);
+  }
+
+  function getRandomTemp() {
+    return Math.floor(Math.random() * (27 - 20 + 1)) + 20;
+  }
+
+function getRandomTurbidez() {
+  const valores = [
+    "Baja", "Baja", "Baja",     // 3 veces más probable
+    "Moderada", "Moderada",     // 2 veces
+    "Alta"                      // 1 vez
+  ];
+  return valores[Math.floor(Math.random() * valores.length)];
+}
+
+  function getRandomOxigeno() {
+    return (5.5 + Math.random() * 1.5).toFixed(1);
+  }
+
+  function actualizarDatos() {
+    document.getElementById("ph").textContent = `${getRandomPH()} (Estable)`;
+    document.getElementById("temp").textContent = `${getRandomTemp()}°C`;
+    document.getElementById("turbidez").textContent = getRandomTurbidez();
+    document.getElementById("oxigeno").textContent = `${getRandomOxigeno()} mg/L`;
+  }
+
+  // Actualiza al cargar
+  actualizarDatos();
+
+  // Actualiza cada 5 segundos
+  setInterval(actualizarDatos, 5000);
+</script>
+</body>
+</html>
