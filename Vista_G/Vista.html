@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control de Ríos y Alertas</title>
+  <link rel="stylesheet" href="stylevista.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <div class="nav-top">
+      <a href="../Administrador/administra.html">ADMINISTRADORES</a>
+      <a href="../Autoridad/autoridades.html">AUTORIDADES</a>
+      <a href="#" class="active">ESTADO DE RÍOS</a>
+      <a href="#">ALERTAS</a>
+    </div>
+  </header>
+ 
+  <div class="layout">
+    <aside class="sidebar">
+      <a href="#">DIAGRAMA DE PH DEL AGUA</a>
+      <a href="#">DIAGRAMA CONTAMINACIÓN</a>
+      <a href="#">HISTOGRAMA DE RÍOS</a>
+      <a href="#">ESTADO DE RÍOS</a>
+    </aside>
+
+    <main class="main-content">
+      <div class="top-bar">
+        <div class="breadcrumbs">Inicio > Usuario > Interfaz > Control</div>
+        <div class="search-bar">
+          <input type="text" placeholder="🔍 Buscar" />
+        </div>
+      </div>
+
+      <h2>CONTROL DE RÍOS Y ALERTAS</h2>
+
+      <div class="graphs">
+        <canvas id="graficoCircular" width="300" height="300"></canvas>
+        <canvas id="graficoBarras" width="300" height="300"></canvas>
+        <canvas id="graficoLineas" width="300" height="300"></canvas>
+        <canvas id="graficoRadar" width="300" height="300"></canvas>
+      </div>
+
+      <div class="info-boxes">
+        <table>
+          <thead>
+            <tr><th>Río</th><th>pH</th><th>Resultado</th><th>Estado</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Río Mantaro</td><td>6.5</td><td>Agua natural</td><td>Moderadamente contaminado</td></tr>
+            <tr><td>Río Cunas</td><td>7.0</td><td>Ideal</td><td>Ligeramente afectado</td></tr>
+            <tr><td>Río Shullcas</td><td>6.2</td><td>Ácido</td><td>Contaminado</td></tr>
+          </tbody>
+        </table>
+        <img src="grafico3.png" alt="Gráfico de línea" />
+      </div>
+
+      <!-- Sección de resumen informativo -->
+      <div class="resumen-final">
+        <h3>Resumen del Estado de los Ríos</h3>
+        <p>
+          El monitoreo actual muestra que el <strong>Río Shullcas</strong> presenta el mayor nivel de contaminación, 
+          mientras que el <strong>Río Cunas</strong> mantiene un pH ideal. Se recomienda continuar con la vigilancia 
+          y aplicar medidas de mitigación en las zonas más afectadas.
+        </p>
+
+        <div class="indicadores">
+          <div class="indicador">
+            <span class="color-box" style="background-color: #ef5350;"></span>
+            Alto riesgo
+          </div>
+          <div class="indicador">
+            <span class="color-box" style="background-color: #ffa726;"></span>
+            Riesgo moderado
+          </div>
+          <div class="indicador">
+            <span class="color-box" style="background-color: #66bb6a;"></span>
+            Condición aceptable
+          </div>
+        </div>
+
+        <div class="acciones">
+          <a href="#" class="boton-detalles">📊 Ver reporte detallado</a>
+        </div>
+      </div>
+
+      <div class="back-button">
+        <a href="#">⟵ volver</a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts de Chart.js -->
+  <script>
+    const ctxCircular = document.getElementById('graficoCircular').getContext('2d');
+    new Chart(ctxCircular, {
+      type: 'pie',
+      data: {
+        labels: ['Contaminantes', 'Residuos sólidos', 'Agua pura', 'Minerales útiles'],
+        datasets: [{
+          label: 'Composición del Agua en Ríos de Huancayo',
+          data: [30, 25, 35, 10],
+          backgroundColor: ['#ef5350', '#ffa726', '#4db6ac', '#9575cd'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
+    });
+
+    const ctxBarras = document.getElementById('graficoBarras').getContext('2d');
+    new Chart(ctxBarras, {
+      type: 'bar',
+      data: {
+        labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+        datasets: [
+          {
+            label: 'Río Mantaro',
+            data: [55, 52, 50, 48, 46, 45],
+            backgroundColor: '#42a5f5'
+          },
+          {
+            label: 'Río Cunas',
+            data: [40, 38, 36, 35, 34, 33],
+            backgroundColor: '#66bb6a'
+          },
+          {
+            label: 'Río Shullcas',
+            data: [70, 68, 67, 65, 64, 63],
+            backgroundColor: '#ef5350'
+          }
+        ]
+      },
+      options: {
+        responsive: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Nivel de Contaminación (%)'
+            }
+          }
+        },
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
+    });
+
+    const ctxLineas = document.getElementById('graficoLineas').getContext('2d');
+    new Chart(ctxLineas, {
+      type: 'line',
+      data: {
+        labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+        datasets: [
+          {
+            label: 'pH Río Mantaro',
+            data: [6.8, 6.7, 6.9, 6.6, 6.5, 6.5],
+            borderColor: '#42a5f5',
+            backgroundColor: 'transparent',
+            tension: 0.4
+          },
+          {
+            label: 'pH Río Cunas',
+            data: [7.1, 7.0, 7.0, 6.9, 7.0, 7.0],
+            borderColor: '#66bb6a',
+            backgroundColor: 'transparent',
+            tension: 0.4
+          },
+          {
+            label: 'pH Río Shullcas',
+            data: [6.2, 6.3, 6.1, 6.2, 6.1, 6.2],
+            borderColor: '#ef5350',
+            backgroundColor: 'transparent',
+            tension: 0.4
+          }
+        ]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: { position: 'bottom' }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            title: {
+              display: true,
+              text: 'Nivel de pH'
+            }
+          }
+        }
+      }
+    });
+
+    const ctxRadar = document.getElementById('graficoRadar').getContext('2d');
+    new Chart(ctxRadar, {
+      type: 'radar',
+      data: {
+        labels: ['pH promedio', 'Contaminación (%)', 'Residuos sólidos (%)'],
+        datasets: [
+          {
+            label: 'Río Mantaro',
+            data: [6.5, 45, 25],
+            backgroundColor: 'rgba(66, 165, 245, 0.2)',
+            borderColor: '#42a5f5',
+            pointBackgroundColor: '#42a5f5'
+          },
+          {
+            label: 'Río Cunas',
+            data: [7.0, 33, 20],
+            backgroundColor: 'rgba(102, 187, 106, 0.2)',
+            borderColor: '#66bb6a',
+            pointBackgroundColor: '#66bb6a'
+          },
+          {
+            label: 'Río Shullcas',
+            data: [6.2, 63, 30],
+            backgroundColor: 'rgba(239, 83, 80, 0.2)',
+            borderColor: '#ef5350',
+            pointBackgroundColor: '#ef5350'
+          }
+        ]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: { position: 'bottom' }
+        },
+        scales: {
+          r: {
+            angleLines: { display: true },
+            suggestedMin: 0,
+            suggestedMax: 100
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+
