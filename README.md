@@ -23,11 +23,3 @@ HidroScan es una aplicación desarrollada como parte del proyecto final de **Dis
 - **Control de versiones:** Git y GitHub
 
 ---
-
-## 🖼️ Capturas de pantalla
-
-*(Agrega aquí imágenes del sistema si lo deseas, por ejemplo usando Markdown)*
-
-```md
-![Pantalla principal](./screenshots/inicio.png)
-![Gráfico de calidad](./screenshots/grafico.png)
